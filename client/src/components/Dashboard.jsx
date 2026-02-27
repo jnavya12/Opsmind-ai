@@ -129,7 +129,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        "${import.meta.env.VITE_API_URL}/api/upload",
+        `${import.meta.env.VITE_API_URL}/api/upload`,
         formData,
         {
           headers: {
@@ -162,7 +162,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        "${import.meta.env.VITE_API_URL}/api/chat",
+        `${import.meta.env.VITE_API_URL}/api/chat`,
         { query },
         {
           headers: { Authorization: `Bearer ${token}` },
