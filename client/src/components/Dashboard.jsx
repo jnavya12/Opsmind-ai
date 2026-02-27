@@ -82,9 +82,12 @@ const Dashboard = () => {
       }
 
       try {
-        const res = await axios.get("http://127.0.0.1:5000/api/chat/history", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          "${import.meta.env.VITE_API_URL}/api/chat/history",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
 
         if (res.data && res.data.length > 0) {
           setChatHistory((prev) => [...prev.slice(0, 1), ...res.data]);
@@ -126,7 +129,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        "http://127.0.0.1:5000/api/upload",
+        "${import.meta.env.VITE_API_URL}/api/upload",
         formData,
         {
           headers: {
@@ -159,7 +162,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        "http://127.0.0.1:5000/api/chat",
+        "${import.meta.env.VITE_API_URL}/api/chat",
         { query },
         {
           headers: { Authorization: `Bearer ${token}` },
