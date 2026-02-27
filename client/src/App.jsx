@@ -1,11 +1,11 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import Auth from './components/Auth';
-import Dashboard from './components/Dashboard';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Auth from "./components/Auth";
+import Dashboard from "./components/Dashboard";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   if (!token) {
     return <Navigate to="/auth" replace />;
   }
@@ -28,7 +28,7 @@ function App() {
                       OpsMind AI
                     </h1>
                     <p className="text-gray-400 mt-2 text-lg">
-                      Enterprise SOP Agent (RAG + Gemini 1.5 Flash)
+                      Enterprise SOP Agent (RAG + Llama)
                     </p>
                   </header>
 

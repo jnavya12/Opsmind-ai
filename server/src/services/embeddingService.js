@@ -1,20 +1,29 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-// Initialize with a placeholder if env var is missing to avoid immediate crash on require, 
-// check at runtime
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "TEMP_KEY");
-
+// Simple local embedding using word hashing (no API needed)
 const generateEmbedding = async (text) => {
-    try {
-        // Using text-embedding-004 model for high quality embeddings
-        const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
-        const result = await model.embedContent(text);
-        const embedding = result.embedding;
-        return embedding.values;
-    } catch (error) {
-        console.error("Error generating embedding:", error);
-        throw error;
+  try {
+    const DIMS = 384;
+    const embedding = new Array(DIMS).fill(0);
+    const words = text.toLowerCase().split(/\s+/);
+
+    for (const word of words) {
+      let hash = 5381;
+      for (let i = 0; i < word.length; i++) {
+        hash = (hash << 5) + hash + word.charCodeAt(i);
+        hash = hash & hash;
+      }
+      const idx = Math.abs(hash) % DIMS;
+      embedding[idx] += 1;
     }
-}
+
+    // Normalize
+    const magnitude = Math.sqrt(
+      embedding.reduce((sum, val) => sum + val * val, 0),
+    );
+    return magnitude > 0 ? embedding.map((v) => v / magnitude) : embedding;
+  } catch (error) {
+    console.error("Error generating embedding:", error);
+    throw error;
+  }
+};
 
 module.exports = { generateEmbedding };
