@@ -20,7 +20,7 @@ const Auth = () => {
 
     try {
       const res = await axios.post(
-        `http://127.0.0.1:5000/api/auth${endpoint}`,
+        `${import.meta.env.VITE_API_URL}/api/auth${endpoint}`,
         {
           username,
           password,
