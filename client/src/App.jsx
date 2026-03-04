@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./components/Auth";
 import Dashboard from "./components/Dashboard";
+import Landing from "./pages/Landing";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -16,9 +17,17 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
       <Routes>
+        {/* Landing Page - Public */}
+        <Route path="/" element={<Landing />} />
+
+        {/* Auth - Login/Signup */}
         <Route path="/auth" element={<Auth />} />
+        <Route path="/login" element={<Auth />} />
+        <Route path="/signup" element={<Auth />} />
+
+        {/* Dashboard - Protected */}
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <ProtectedRoute>
               <div className="p-8">
@@ -44,6 +53,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* Catch all - redirect to landing */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
