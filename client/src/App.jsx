@@ -46,7 +46,8 @@ function App() {
                   </main>
 
                   <footer className="mt-12 text-center text-gray-500 text-sm">
-                    &copy; 2025 Zaalima Development - AI Engineering Division
+                    &copy; 2026 OpsMind AI. Built with ❤️ for better document
+                    understanding.
                   </footer>
                 </div>
               </div>
